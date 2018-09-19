@@ -29,29 +29,29 @@ def disconnect(event):
 def update(s):
     if check_nan():
         ## line 1 
-        x = [origin[0],origin[0]+60*np.cos(t[0])]
-        y = [origin[1],origin[1]+60*np.sin(t[0])]
+        x = [origin[0],origin[0]+r1*np.cos(t[0])]
+        y = [origin[1],origin[1]+r1*np.sin(t[0])]
         line1.set_data(x,y)
 
         ## line 2
-        x = [x[1],x[1]+100*np.cos(a[0])]
-        y = [y[1],y[1]+100*np.sin(a[0])]
+        x = [x[1],x[1]+r2*np.cos(a[0])]
+        y = [y[1],y[1]+r2*np.sin(a[0])]
         line2.set_data(x,y)
 
         
         ## line 4
-        x = [origin[0]+80,origin[0]+80+60*np.cos(t[3])]
-        y = [origin[1],origin[1]+60*np.sin(t[3])]
+        x = [origin[0]+r5,origin[0]+r5+r4*np.cos(t[3])]
+        y = [origin[1],origin[1]+r4*np.sin(t[3])]
         line4.set_data(x,y)
         
         ## line 3
-        x = [x[1],x[1]+100*np.cos(a[1])]
-        y = [y[1],y[1]+100*np.sin(a[1])]
+        x = [x[1],x[1]+r3*np.cos(a[1])]
+        y = [y[1],y[1]+r3*np.sin(a[1])]
         line3.set_data(x,y)
 
         ## line 5
-        x = [origin[0],origin[0]+80]
-        y = [origin[1],30]
+        x = [origin[0],origin[0]+r5]
+        y = [origin[1],pad]
         line5.set_data(x,y)
 
         line6.set_data(x_end,y_end)
