@@ -77,9 +77,15 @@ y_in = 150 # initial end efector y position
 
 # initial declarations of graph
 
-pad = 30 # do not make me zero, unless you do not want everything will mess up   
-xmax = r1+r2+r5/2+pad
-ymax = r1+r2+pad*2
+pad = 30 # do not make me zero, unless you do not want everything will mess up
+
+if r2>r3:
+    big_l = r2
+else:
+    big_l = r3
+    
+xmax = r1+big_l+r5/2+pad
+ymax = r1+big_l+pad*2
 fig, ax = plt.subplots()
 ax.axis([0,xmax,0,ymax])
 origin = [xmax/2-r5/2,pad]
