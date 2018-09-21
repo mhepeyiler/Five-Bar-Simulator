@@ -106,6 +106,3 @@ fig.canvas.mpl_connect('button_press_event', onclick)
 fig.canvas.mpl_connect('button_release_event',disconnect)
 ani = animation.FuncAnimation(fig, update,frames=None,blit=True,interval=25)
 plt.show()
-
-
-
