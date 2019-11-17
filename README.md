@@ -1,6 +1,6 @@
 # Five-Bar-Simulator
 
-Hi, in this program help to design a five bar. You can test your work space even you do not have physical system. 
+Hi, in this program you can test your five bar manipulator workspace even you don't have physical system.
 Only you need to do that is;
 
 r1,r2,r3,r4,r5 change these parameters.
