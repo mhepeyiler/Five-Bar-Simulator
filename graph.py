@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import matplotlib.lines as lines
-import kinetics 
+import kinematics
 
 
 def onclick(event):
@@ -77,7 +77,7 @@ r3 = 100
 r4 = 60
 r5 = 80
 
-robot = kinetics.five_bar(r1,r2,r3,r4,r5)
+robot = kinematics.five_bar(r1,r2,r3,r4,r5)
 
 x_in = 40 # initial end efector y position
 y_in = 150 # initial end efector y position
