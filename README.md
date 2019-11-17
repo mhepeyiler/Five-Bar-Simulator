@@ -28,8 +28,8 @@ Also, you can freely use kinematics.py module in your project. :)
 
 ### Screenshots from program
 
-Start
+
 ![alt text](https://raw.githubusercontent.com/mhepeyiler/Five-Bar-Simulator/master/images/simulator_screen.png)
 
-Used
+
 ![alt text](https://raw.githubusercontent.com/mhepeyiler/Five-Bar-Simulator/master/images/moved.png)
