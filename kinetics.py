@@ -51,13 +51,12 @@ class five_bar():
         G = A_1 +B_1*E+ E**2
         D_1 = D**2
 
-        y_1 = (-F-np.sqrt(F**2-4*G*D_1))/(2*D_1)
-        y_2 = (-F+np.sqrt(F**2-4*G*D_1))/(2*D_1)
+        self.y1 = (-F-np.sqrt(F**2-4*G*D_1))/(2*D_1)
+        self.y2 = (-F+np.sqrt(F**2-4*G*D_1))/(2*D_1)
 
-        x_1 = D*y_1 + E
-        x_2 = D*y_2 + E
+        self.x1 = D*self.y1 + E
+        self.x2 = D*self.y2 + E
 
-        return x_1,x_2,y_1,y_2        
 
     def inverse(self,p_x,p_y):
         r1 = self.r1
@@ -74,9 +73,8 @@ class five_bar():
         t_11 = (-B1+np.sqrt(B1**2-4*A1*C1))/(2*A1)
         t_12 = (-B1-np.sqrt(B1**2-4*A1*C1))/(2*A1)
         
-        a_11 = atan2((2*t_11),(1-t_11**2))
-        a_12 = atan2((2*t_12),(1-t_12**2))
-        #######
+        self.a11 = atan2((2*t_11),(1-t_11**2))
+        self.a12 = atan2((2*t_12),(1-t_12**2))
 
         #### Second Loop ####
 
@@ -87,16 +85,37 @@ class five_bar():
         t_21 = (-B2+np.sqrt(B2**2-4*A2*C2))/(2*A2)
         t_22 = (-B2-np.sqrt(B2**2-4*A2*C2))/(2*A2)
         
-        a_41 = atan2((2*t_21),(1-t_21**2))
-        a_42 = atan2((2*t_22),(1-t_22**2))
+        self.a41 = atan2((2*t_21),(1-t_21**2))
+        self.a42 = atan2((2*t_22),(1-t_22**2))
+    
+    def get_a11(self):
+        return self.a11
 
-        return a_11,a_12,a_41,a_42
+    def get_a12(self):
+        return self.a12
 
-    def get_a2_a3(self,a1,a4,x,y):
+    def get_a2(self,a1,p_x,p_y):
+        a2 = atan2((p_y - self.r1*sin(a1)),(p_x-self.r1*cos(a1)))
+        return a2
+    
+    def get_a3(self,a4,p_x,p_y):
+        a3 = atan2((p_y-self.r4*sin(a4)),(p_x-self.r5-self.r4*cos(a4)))
+        return a3
+    
+    def get_a41(self):
+        return self.a41
+    
+    def get_a42(self):
+        return self.a42
 
-        r1 = self.r1
-        r4 = self.r4
-        r5 = self.r5
-        a2 = atan2((y - r1*sin(a1)),(x-r1*cos(a1)))
-        a3 = atan2((y-r4*sin(a4)),(x-r5-r4*cos(a4)))
-        return a2,a3
+    def get_x1(self):
+        return self.x1
+    
+    def get_x2(self):
+        return self.x2
+    
+    def get_y1(self):
+        return self.y1
+    
+    def get_y2(self):
+        return self.y2

@@ -11,12 +11,19 @@ def onclick(event):
 
 def check_nan():
     # to control, is the point in workspace of robot
-    return not np.isnan(t[0]) and not np.isnan(t[3]) and not np.isnan(a[0]) and not np.isnan(a[1])
+    return not np.isnan(a[0]) and not np.isnan(a[1]) and not np.isnan(a[2]) and not np.isnan(a[3])
 
 def pull(event):
-    global t,a
-    t = robot.inverse(event.xdata-origin[0],event.ydata-origin[1])
-    a = robot.get_a2_a3(t[0],t[3],event.xdata-origin[0],event.ydata-origin[1])
+    global a
+    x = event.xdata-origin[0]
+    y = event.ydata-origin[1]
+    #print(x,y)
+    robot.inverse(x,y)
+    a[0] = robot.get_a11()
+    a[1] = robot.get_a2(a[0],x,y)
+    a[3] = robot.get_a42()
+    a[2] = robot.get_a3(a[3],x,y)
+    #print(a)
     if check_nan():
         x_end.append(event.xdata)
         y_end.append(event.ydata)
@@ -29,24 +36,24 @@ def disconnect(event):
 def update(s):
     if check_nan():
         ## line 1 
-        x = [origin[0],origin[0]+r1*np.cos(t[0])]
-        y = [origin[1],origin[1]+r1*np.sin(t[0])]
+        x = [origin[0],origin[0]+r1*np.cos(a[0])]
+        y = [origin[1],origin[1]+r1*np.sin(a[0])]
         line1.set_data(x,y)
 
         ## line 2
-        x = [x[1],x[1]+r2*np.cos(a[0])]
-        y = [y[1],y[1]+r2*np.sin(a[0])]
+        x = [x[1],x[1]+r2*np.cos(a[1])]
+        y = [y[1],y[1]+r2*np.sin(a[1])]
         line2.set_data(x,y)
 
         
         ## line 4
-        x = [origin[0]+r5,origin[0]+r5+r4*np.cos(t[3])]
-        y = [origin[1],origin[1]+r4*np.sin(t[3])]
+        x = [origin[0]+r5,origin[0]+r5+r4*np.cos(a[3])]
+        y = [origin[1],origin[1]+r4*np.sin(a[3])]
         line4.set_data(x,y)
         
         ## line 3
-        x = [x[1],x[1]+r3*np.cos(a[1])]
-        y = [y[1],y[1]+r3*np.sin(a[1])]
+        x = [x[1],x[1]+r3*np.cos(a[2])]
+        y = [y[1],y[1]+r3*np.sin(a[2])]
         line3.set_data(x,y)
 
         ## line 5
@@ -84,6 +91,7 @@ if r2>r3:
 else:
     big_l = r3
     
+a = [0,0,0,0]
 xmax = r1+big_l+r5/2+pad
 ymax = r1+big_l+pad*2
 fig, ax = plt.subplots()
@@ -95,8 +103,11 @@ line3, = ax.plot([], [],lw=2,animated=True,c='b')
 line4, = ax.plot([], [],lw=2,animated=True,c='b')
 line5, = ax.plot([], [],lw=2,animated=True,c='b')
 line6, = ax.plot([], [],lw=1,animated=True,c='g')
-t = robot.inverse(x_in,y_in)
-a = robot.get_a2_a3(t[0],t[3],x_in,y_in)
+robot.inverse(x_in,y_in)
+a[0] = robot.get_a11()
+a[1] = robot.get_a2(a[0],x_in,y_in)
+a[3] = robot.get_a42()
+a[2] = robot.get_a3(a[3],x_in,y_in)
 x_end = []
 y_end = []   
 
